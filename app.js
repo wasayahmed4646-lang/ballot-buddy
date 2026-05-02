@@ -3,64 +3,12 @@ const chatForm = document.querySelector("#chatForm");
 const questionInput = document.querySelector("#question");
 const roleInput = document.querySelector("#role");
 const regionInput = document.querySelector("#region");
-const apiKeyInput = document.querySelector("#apiKey");
-const saveKeyButton = document.querySelector("#saveKey");
 const plannerForm = document.querySelector("#plannerForm");
 const timelineOutput = document.querySelector("#timelineOutput");
 const quizResult = document.querySelector("#quizResult");
-
-const storedKey = localStorage.getItem("ballotBuddyGeminiKey");
-if (storedKey) {
-  apiKeyInput.value = storedKey;
-}
-
-const knowledgeBase = [
-  {
-    keywords: ["eligib", "age", "citizen", "qualify"],
-    title: "Eligibility",
-    points: [
-      "Check the minimum voting age, citizenship rules, and residence rules for your region.",
-      "Confirm that your name appears on the voter list before the deadline.",
-      "If you recently moved, update your address before relying on an old registration."
-    ]
-  },
-  {
-    keywords: ["register", "registration", "enrol", "enroll", "deadline", "form"],
-    title: "Registration",
-    points: [
-      "Find the official election authority website for your country, state, or district.",
-      "Submit the required form with identity, age, and residence proof where required.",
-      "Save your application number or confirmation receipt and check status regularly."
-    ]
-  },
-  {
-    keywords: ["document", "id", "carry", "proof", "polling"],
-    title: "Documents and Polling Station",
-    points: [
-      "Carry an accepted photo ID and any voter slip or official confirmation available in your area.",
-      "Verify the polling station address from the official election authority close to election day.",
-      "Do not rely only on forwarded messages for booth location or document rules."
-    ]
-  },
-  {
-    keywords: ["timeline", "date", "schedule", "before", "prepare"],
-    title: "Timeline",
-    points: [
-      "Start by noting the registration deadline, candidate list publication, campaign silence period, polling day, and counting day.",
-      "Set reminders two weeks before each deadline so you have time to fix missing documents.",
-      "Use the planner below to generate a checklist and Google Calendar reminders."
-    ]
-  },
-  {
-    keywords: ["count", "result", "winner", "declare", "certify"],
-    title: "Counting and Results",
-    points: [
-      "Votes are counted according to the election system used in that region.",
-      "Preliminary trends can change until counting is complete and results are certified.",
-      "Use official result portals for final outcomes and avoid sharing unverified claims."
-    ]
-  }
-];
+const statusDot = document.querySelector("#statusDot");
+const statusText = document.querySelector("#statusText");
+const statusDetail = document.querySelector("#statusDetail");
 
 function addMessage(type, title, text) {
   const article = document.createElement("article");
@@ -87,56 +35,41 @@ function escapeHtml(value) {
   }[char]));
 }
 
-function localAnswer(question) {
-  const lowerQuestion = question.toLowerCase();
-  const role = roleInput.value;
-  const region = regionInput.value.trim() || "your region";
-  const match = knowledgeBase.find((entry) => entry.keywords.some((keyword) => lowerQuestion.includes(keyword))) || knowledgeBase[0];
-  const points = match.points.map((point) => `<li>${point}</li>`).join("");
+function formatAssistantAnswer(answer) {
+  const steps = Array.isArray(answer.steps) ? answer.steps : [];
+  const list = steps.map((step) => `<li>${escapeHtml(step)}</li>`).join("");
+  const badge = answer.source === "gemini" ? "Gemini powered" : "Built-in guide";
+  const note = answer.note ? `<p class="helper">${escapeHtml(answer.note)}</p>` : "";
 
   return `
-    For a <strong>${escapeHtml(role)}</strong> in <strong>${escapeHtml(region)}</strong>, focus on <strong>${match.title}</strong> first.
-    <ul>${points}</ul>
-    <p>Because election rules vary by location, verify final dates and document lists with the official election authority.</p>
+    <span class="answer-badge">${badge}</span>
+    <p>${escapeHtml(answer.summary || "Here is a neutral election process guide.")}</p>
+    ${list ? `<ul>${list}</ul>` : ""}
+    <p><strong>Next step:</strong> ${escapeHtml(answer.nextStep || "Verify the next step with the official election authority.")}</p>
+    <p class="caution">${escapeHtml(answer.caution || "Always verify final election information with official sources.")}</p>
+    ${note}
   `;
 }
 
-async function geminiAnswer(question) {
-  const apiKey = apiKeyInput.value.trim();
-  if (!apiKey) {
-    return null;
-  }
-
-  const role = roleInput.value;
-  const region = regionInput.value.trim() || "the user's region";
-  const prompt = [
-    "You are Ballot Buddy, a neutral election process education assistant.",
-    "Do not support any party or candidate. Do not invent official deadlines.",
-    "Explain steps clearly, ask users to verify final facts with official election authorities, and keep the answer concise.",
-    `User context: ${role} in ${region}.`,
-    `Question: ${question}`
-  ].join("\n");
-
-  const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${encodeURIComponent(apiKey)}`, {
+async function backendAnswer(question) {
+  const response = await fetch("/api/assistant", {
     method: "POST",
     headers: {
       "Content-Type": "application/json"
     },
     body: JSON.stringify({
-      contents: [
-        {
-          parts: [{ text: prompt }]
-        }
-      ]
+      question,
+      role: roleInput.value,
+      region: regionInput.value.trim()
     })
   });
 
   if (!response.ok) {
-    throw new Error("Gemini request failed");
+    const error = await response.json().catch(() => ({}));
+    throw new Error(error.error || "Assistant request failed");
   }
 
-  const data = await response.json();
-  return escapeHtml(data.candidates?.[0]?.content?.parts?.[0]?.text || "").replace(/\n/g, "<br>");
+  return response.json();
 }
 
 async function handleQuestion(question) {
@@ -146,10 +79,10 @@ async function handleQuestion(question) {
 
   const pending = chatLog.lastElementChild;
   try {
-    const answer = await geminiAnswer(question);
-    pending.querySelector("p").innerHTML = answer || localAnswer(question);
+    const answer = await backendAnswer(question);
+    pending.querySelector("p").outerHTML = `<div>${formatAssistantAnswer(answer)}</div>`;
   } catch (error) {
-    pending.querySelector("p").innerHTML = `${localAnswer(question)}<p class="helper">Gemini was unavailable, so I used the built-in guide.</p>`;
+    pending.querySelector("p").innerHTML = `${escapeHtml(error.message)}. Start the local server with <strong>npm start</strong> or deploy the app to Vercel so the backend API is available.`;
   }
 }
 
@@ -165,20 +98,6 @@ document.querySelectorAll("[data-prompt]").forEach((button) => {
   button.addEventListener("click", () => {
     handleQuestion(button.dataset.prompt);
   });
-});
-
-saveKeyButton.addEventListener("click", () => {
-  const key = apiKeyInput.value.trim();
-  if (key) {
-    localStorage.setItem("ballotBuddyGeminiKey", key);
-    saveKeyButton.textContent = "Saved";
-  } else {
-    localStorage.removeItem("ballotBuddyGeminiKey");
-    saveKeyButton.textContent = "Cleared";
-  }
-  setTimeout(() => {
-    saveKeyButton.textContent = "Save Key";
-  }, 1200);
 });
 
 function addDays(date, days) {
@@ -260,3 +179,25 @@ document.querySelectorAll("[data-answer]").forEach((button) => {
     quizResult.style.color = correct ? "var(--green)" : "var(--red)";
   });
 });
+
+async function checkBackend() {
+  try {
+    const response = await fetch("/api/health");
+    const data = await response.json();
+    if (!response.ok || !data.ok) {
+      throw new Error("Health check failed");
+    }
+
+    statusDot.classList.add("online");
+    statusText.textContent = "Backend online";
+    statusDetail.textContent = data.geminiConfigured
+      ? "Gemini is configured on the server."
+      : "Using the built-in guide until GEMINI_API_KEY is added.";
+  } catch (error) {
+    statusDot.classList.add("offline");
+    statusText.textContent = "Backend offline";
+    statusDetail.textContent = "Run npm start or deploy to Vercel to enable chat.";
+  }
+}
+
+checkBackend();

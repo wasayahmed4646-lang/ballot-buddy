@@ -1,0 +1,21 @@
+{
+  "name": "ballot-buddy-promptwars",
+  "version": "1.0.0",
+  "description": "Election process education assistant for PromptWars Virtual.",
+  "private": true,
+  "scripts": {
+    "start": "node server.js",
+    "check": "node --check app.js && node --check server.js && node --check api/assistant.js && node --check src/assistantCore.js"
+  },
+  "keywords": [
+    "promptwars",
+    "election",
+    "assistant",
+    "google-gemini",
+    "civic-education"
+  ],
+  "license": "MIT",
+  "engines": {
+    "node": ">=18"
+  }
+}

@@ -176,6 +176,13 @@ nav a:hover {
   padding: clamp(18px, 3vw, 28px);
 }
 
+.hero-mark {
+  aspect-ratio: 1;
+  justify-self: center;
+  max-width: 164px;
+  width: 48%;
+}
+
 .journey-step {
   align-items: center;
   border: 1px solid var(--line);
@@ -285,6 +292,40 @@ select:focus {
   margin: 0 0 8px;
 }
 
+.status-card {
+  align-items: start;
+  background: #f7f8f5;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  display: grid;
+  gap: 10px;
+  grid-template-columns: auto 1fr;
+  margin-top: 8px;
+  padding: 12px;
+}
+
+.status-card p {
+  color: var(--muted);
+  font-size: 0.86rem;
+  margin: 4px 0 0;
+}
+
+.status-dot {
+  background: var(--gold);
+  border-radius: 50%;
+  height: 12px;
+  margin-top: 6px;
+  width: 12px;
+}
+
+.status-dot.online {
+  background: var(--green);
+}
+
+.status-dot.offline {
+  background: var(--red);
+}
+
 .chat-shell {
   display: grid;
   grid-template-rows: minmax(320px, 1fr) auto auto;
@@ -308,6 +349,27 @@ select:focus {
 
 .message p {
   margin: 6px 0 0;
+}
+
+.message ul {
+  margin: 10px 0;
+  padding-left: 20px;
+}
+
+.answer-badge {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  color: var(--green);
+  display: inline-flex;
+  font-size: 0.78rem;
+  font-weight: 900;
+  margin-bottom: 6px;
+  padding: 4px 8px;
+}
+
+.caution {
+  color: #744026;
 }
 
 .assistant-message {
@@ -411,6 +473,33 @@ select:focus {
   border-radius: 8px;
   min-height: 180px;
   padding: 18px;
+  position: relative;
+  overflow: hidden;
+}
+
+.card-accent {
+  display: block;
+  height: 5px;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.card-accent.green {
+  background: var(--green);
+}
+
+.card-accent.gold {
+  background: var(--gold);
+}
+
+.card-accent.blue {
+  background: var(--blue);
+}
+
+.card-accent.red {
+  background: var(--red);
 }
 
 .card h3,

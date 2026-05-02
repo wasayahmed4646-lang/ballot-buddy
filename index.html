@@ -35,6 +35,7 @@
           </div>
         </div>
         <div class="hero-panel" aria-label="Election journey preview">
+          <img class="hero-mark" src="assets/ballot-mark.svg" alt="Stylized ballot checklist">
           <div class="journey-step active">
             <span>1</span>
             <p>Check eligibility</p>
@@ -74,13 +75,13 @@
             <label for="region">Country or state</label>
             <input id="region" type="text" placeholder="Example: India, Maharashtra" autocomplete="address-level1">
 
-            <label for="apiKey">Gemini API key</label>
-            <input id="apiKey" type="password" placeholder="Optional">
-            <p class="helper">
-              Leave blank for the built-in guide. Add a key to use Gemini for richer explanations.
-            </p>
-
-            <button class="button secondary full" id="saveKey" type="button">Save Key</button>
+            <div class="status-card">
+              <span class="status-dot" id="statusDot" aria-hidden="true"></span>
+              <div>
+                <strong id="statusText">Checking backend</strong>
+                <p id="statusDetail">The app uses a server API for assistant responses.</p>
+              </div>
+            </div>
           </aside>
 
           <div class="chat-shell">
@@ -89,7 +90,7 @@
                 <strong>Ballot Buddy</strong>
                 <p>
                   Hi. Tell me what you need: registration, eligibility, documents, timelines,
-                  polling day steps, or election result basics.
+                  polling day steps, or election result basics. I will keep it neutral and point you back to official verification.
                 </p>
               </article>
             </div>
@@ -144,18 +145,22 @@
 
         <div class="cards">
           <article class="card">
+            <span class="card-accent green"></span>
             <h3>Eligibility</h3>
             <p>Most systems require citizenship, a minimum voting age, and registration in the correct area.</p>
           </article>
           <article class="card">
+            <span class="card-accent gold"></span>
             <h3>Registration</h3>
             <p>Voters usually submit identity, residence, and age details before a deadline.</p>
           </article>
           <article class="card">
+            <span class="card-accent blue"></span>
             <h3>Polling Day</h3>
             <p>Voters verify identity, receive a ballot or use a machine, cast their vote, and leave peacefully.</p>
           </article>
           <article class="card">
+            <span class="card-accent red"></span>
             <h3>Results</h3>
             <p>Officials count votes, resolve disputes through defined rules, and publish certified results.</p>
           </article>

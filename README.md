@@ -28,7 +28,17 @@ If no Gemini API key is provided, the app still works through a built-in rule-ba
 
 ## How the Solution Works
 
-Open `index.html` in a browser. No build step is required.
+Run the local backend:
+
+```bash
+npm start
+```
+
+Then open:
+
+```text
+http://localhost:3000
+```
 
 Main features:
 
@@ -39,6 +49,18 @@ Main features:
 - Google Calendar links for reminders
 - Learning cards for key election concepts
 - Simple quiz for safe information habits
+- Backend API at `/api/assistant`
+- Health endpoint at `/api/health`
+
+## Environment Variables
+
+The backend works without secrets by using a built-in guide. To enable Gemini responses, set:
+
+```text
+GEMINI_API_KEY=your_key_here
+```
+
+On Vercel, add this in the project environment variables.
 
 ## Assumptions
 
@@ -61,4 +83,7 @@ This project is designed to stay within PromptWars repository constraints:
 
 - `index.html` - app structure
 - `styles.css` - responsive styling
-- `app.js` - assistant, planner, Gemini integration, and quiz behavior
+- `app.js` - frontend assistant, planner, and quiz behavior
+- `server.js` - local Node backend and static server
+- `api/assistant.js` - Vercel serverless assistant endpoint
+- `src/assistantCore.js` - shared assistant logic
