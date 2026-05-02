@@ -1,14 +1,24 @@
 <svg width="240" height="240" viewBox="0 0 240 240" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
-  <title id="title">Ballot Buddy mark</title>
-  <desc id="desc">A stylized ballot with check marks and civic process cards.</desc>
-  <rect width="240" height="240" rx="28" fill="#EEF3EB"/>
-  <rect x="54" y="40" width="116" height="158" rx="14" fill="#FFFFFF" stroke="#D8DED4" stroke-width="4"/>
-  <rect x="74" y="72" width="58" height="10" rx="5" fill="#315C9E"/>
-  <rect x="74" y="104" width="76" height="10" rx="5" fill="#D8DED4"/>
-  <rect x="74" y="136" width="66" height="10" rx="5" fill="#D8DED4"/>
-  <path d="M138 72L146 80L162 62" stroke="#1D6B4F" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
-  <circle cx="176" cy="160" r="34" fill="#1D6B4F"/>
-  <path d="M159 160L171 172L194 143" stroke="#FFFFFF" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
-  <rect x="32" y="166" width="60" height="22" rx="11" fill="#D99F2B"/>
-  <rect x="142" y="26" width="54" height="18" rx="9" fill="#B34A3C"/>
+  <title id="title">Ballot Buddy tricolour mark</title>
+  <desc id="desc">A stylized ballot with saffron, white, green, and navy civic accents.</desc>
+  <rect width="240" height="240" rx="28" fill="#F8FAF6"/>
+  <path d="M0 28C52 8 92 20 134 42C176 64 206 60 240 42V0H0V28Z" fill="#FF9933"/>
+  <path d="M0 240V196C42 176 83 178 128 197C173 216 204 216 240 198V240H0Z" fill="#138808"/>
+  <circle cx="120" cy="120" r="72" fill="#FFFFFF" stroke="#E0E5DC" stroke-width="4"/>
+  <circle cx="120" cy="120" r="24" fill="none" stroke="#000080" stroke-width="5"/>
+  <g stroke="#000080" stroke-width="2" stroke-linecap="round">
+    <path d="M120 88V96"/>
+    <path d="M120 144V152"/>
+    <path d="M88 120H96"/>
+    <path d="M144 120H152"/>
+    <path d="M97.4 97.4L103.1 103.1"/>
+    <path d="M136.9 136.9L142.6 142.6"/>
+    <path d="M142.6 97.4L136.9 103.1"/>
+    <path d="M103.1 136.9L97.4 142.6"/>
+  </g>
+  <rect x="78" y="70" width="84" height="108" rx="12" fill="#FFFFFF" stroke="#000080" stroke-width="4"/>
+  <rect x="94" y="92" width="36" height="7" rx="3.5" fill="#FF9933"/>
+  <rect x="94" y="118" width="52" height="7" rx="3.5" fill="#DCE3D7"/>
+  <rect x="94" y="144" width="44" height="7" rx="3.5" fill="#138808"/>
+  <path d="M132 92L139 99L153 82" stroke="#138808" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
 </svg>

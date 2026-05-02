@@ -68,16 +68,18 @@ select {
 
 .brand-mark {
   align-items: center;
-  background: var(--green);
+  background:
+    linear-gradient(180deg, #ff9933 0 32%, #ffffff 32% 66%, #138808 66% 100%);
   border-radius: 8px;
-  color: #fff;
+  border: 1px solid rgba(0, 0, 128, 0.16);
+  color: #000080;
   display: inline-flex;
   font-size: 0.84rem;
   font-weight: 900;
   height: 42px;
   justify-content: center;
   width: 42px;
-  box-shadow: 0 10px 24px rgba(23, 102, 74, 0.25);
+  box-shadow: 0 10px 24px rgba(19, 136, 8, 0.2);
 }
 
 .topbar h1,
