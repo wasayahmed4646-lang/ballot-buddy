@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Election process education assistant for PromptWars Virtual.">
+    <title>Ballot Buddy</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <header class="topbar">
+      <div>
+        <p class="eyebrow">PromptWars Virtual</p>
+        <h1>Ballot Buddy</h1>
+      </div>
+      <nav aria-label="Primary navigation">
+        <a href="#assistant">Assistant</a>
+        <a href="#planner">Planner</a>
+        <a href="#learn">Learn</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero" aria-labelledby="hero-title">
+        <div class="hero-copy">
+          <p class="eyebrow">Election Process Education</p>
+          <h2 id="hero-title">Understand every election step without getting lost.</h2>
+          <p>
+            Ask a question, pick your voting situation, or build a personal timeline.
+            The assistant keeps answers neutral, accessible, and grounded in official verification.
+          </p>
+          <div class="hero-actions">
+            <a class="button primary" href="#assistant">Start Assistant</a>
+            <a class="button secondary" href="#planner">Build Timeline</a>
+          </div>
+        </div>
+        <div class="hero-panel" aria-label="Election journey preview">
+          <div class="journey-step active">
+            <span>1</span>
+            <p>Check eligibility</p>
+          </div>
+          <div class="journey-step">
+            <span>2</span>
+            <p>Register or update details</p>
+          </div>
+          <div class="journey-step">
+            <span>3</span>
+            <p>Track important dates</p>
+          </div>
+          <div class="journey-step">
+            <span>4</span>
+            <p>Prepare for polling day</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="band" id="assistant" aria-labelledby="assistant-title">
+        <div class="section-heading">
+          <p class="eyebrow">Interactive Assistant</p>
+          <h2 id="assistant-title">Ask about the voting process</h2>
+        </div>
+
+        <div class="assistant-layout">
+          <aside class="control-panel" aria-label="User context">
+            <label for="role">I am a</label>
+            <select id="role">
+              <option value="first-time voter">First-time voter</option>
+              <option value="returning voter">Returning voter</option>
+              <option value="moved recently">Voter who moved recently</option>
+              <option value="student">Student voter</option>
+              <option value="overseas voter">Overseas voter</option>
+            </select>
+
+            <label for="region">Country or state</label>
+            <input id="region" type="text" placeholder="Example: India, Maharashtra" autocomplete="address-level1">
+
+            <label for="apiKey">Gemini API key</label>
+            <input id="apiKey" type="password" placeholder="Optional">
+            <p class="helper">
+              Leave blank for the built-in guide. Add a key to use Gemini for richer explanations.
+            </p>
+
+            <button class="button secondary full" id="saveKey" type="button">Save Key</button>
+          </aside>
+
+          <div class="chat-shell">
+            <div class="chat-log" id="chatLog" aria-live="polite">
+              <article class="message assistant-message">
+                <strong>Ballot Buddy</strong>
+                <p>
+                  Hi. Tell me what you need: registration, eligibility, documents, timelines,
+                  polling day steps, or election result basics.
+                </p>
+              </article>
+            </div>
+
+            <div class="quick-prompts" aria-label="Quick question prompts">
+              <button type="button" data-prompt="How do I know if I am eligible to vote?">Eligibility</button>
+              <button type="button" data-prompt="What steps should I follow before election day?">Before election day</button>
+              <button type="button" data-prompt="What should I carry to the polling station?">Polling day</button>
+              <button type="button" data-prompt="How are votes counted and results declared?">Counting</button>
+            </div>
+
+            <form class="chat-form" id="chatForm">
+              <label class="sr-only" for="question">Ask a question</label>
+              <input id="question" type="text" placeholder="Ask about registration, dates, documents, or voting steps">
+              <button class="button primary" type="submit">Send</button>
+            </form>
+          </div>
+        </div>
+      </section>
+
+      <section class="band planner-band" id="planner" aria-labelledby="planner-title">
+        <div class="section-heading">
+          <p class="eyebrow">Timeline Planner</p>
+          <h2 id="planner-title">Create a voting checklist</h2>
+        </div>
+
+        <div class="planner-grid">
+          <form class="planner-form" id="plannerForm">
+            <label for="electionName">Election name</label>
+            <input id="electionName" type="text" placeholder="Example: Local Assembly Election">
+
+            <label for="electionDate">Election date</label>
+            <input id="electionDate" type="date">
+
+            <label for="deadlineDate">Registration deadline</label>
+            <input id="deadlineDate" type="date">
+
+            <button class="button primary full" type="submit">Generate Checklist</button>
+          </form>
+
+          <div class="timeline-output" id="timelineOutput">
+            <p class="empty-state">Add dates to generate a personalized election preparation plan.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="band" id="learn" aria-labelledby="learn-title">
+        <div class="section-heading">
+          <p class="eyebrow">Learning Cards</p>
+          <h2 id="learn-title">Core election concepts</h2>
+        </div>
+
+        <div class="cards">
+          <article class="card">
+            <h3>Eligibility</h3>
+            <p>Most systems require citizenship, a minimum voting age, and registration in the correct area.</p>
+          </article>
+          <article class="card">
+            <h3>Registration</h3>
+            <p>Voters usually submit identity, residence, and age details before a deadline.</p>
+          </article>
+          <article class="card">
+            <h3>Polling Day</h3>
+            <p>Voters verify identity, receive a ballot or use a machine, cast their vote, and leave peacefully.</p>
+          </article>
+          <article class="card">
+            <h3>Results</h3>
+            <p>Officials count votes, resolve disputes through defined rules, and publish certified results.</p>
+          </article>
+        </div>
+
+        <div class="quiz" aria-labelledby="quiz-title">
+          <h3 id="quiz-title">Quick Check</h3>
+          <p id="quizQuestion">What is the safest source for election deadlines?</p>
+          <div class="quiz-options">
+            <button type="button" data-answer="wrong">A social media post</button>
+            <button type="button" data-answer="correct">The official election authority</button>
+            <button type="button" data-answer="wrong">A forwarded message</button>
+          </div>
+          <p class="quiz-result" id="quizResult" aria-live="polite"></p>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <p>
+        Ballot Buddy is an educational guide. Always verify deadlines, eligibility, and polling information with the official election authority for your region.
+      </p>
+    </footer>
+
+    <script src="app.js"></script>
+  </body>
+</html>
