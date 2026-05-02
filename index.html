@@ -9,9 +9,12 @@
   </head>
   <body>
     <header class="topbar">
-      <div>
+      <div class="brand">
+        <span class="brand-mark" aria-hidden="true">BB</span>
+        <div>
         <p class="eyebrow">PromptWars Virtual</p>
         <h1>Ballot Buddy</h1>
+        </div>
       </div>
       <nav aria-label="Primary navigation">
         <a href="#assistant">Assistant</a>
@@ -29,13 +32,25 @@
             Ask a question, pick your voting situation, or build a personal timeline.
             The assistant keeps answers neutral, accessible, and grounded in official verification.
           </p>
+          <div class="trust-strip" aria-label="Product strengths">
+            <span>Neutral guidance</span>
+            <span>Server API</span>
+            <span>Gemini-ready</span>
+            <span>Calendar planning</span>
+          </div>
           <div class="hero-actions">
             <a class="button primary" href="#assistant">Start Assistant</a>
             <a class="button secondary" href="#planner">Build Timeline</a>
           </div>
         </div>
         <div class="hero-panel" aria-label="Election journey preview">
-          <img class="hero-mark" src="assets/ballot-mark.svg" alt="Stylized ballot checklist">
+          <div class="hero-panel-top">
+            <img class="hero-mark" src="assets/ballot-mark.svg" alt="Stylized ballot checklist">
+            <div>
+              <p class="panel-label">Live Journey Map</p>
+              <strong>4 guided steps</strong>
+            </div>
+          </div>
           <div class="journey-step active">
             <span>1</span>
             <p>Check eligibility</p>
@@ -56,13 +71,22 @@
       </section>
 
       <section class="band" id="assistant" aria-labelledby="assistant-title">
-        <div class="section-heading">
+        <div class="section-heading split-heading">
+          <div>
           <p class="eyebrow">Interactive Assistant</p>
           <h2 id="assistant-title">Ask about the voting process</h2>
+          </div>
+          <p>
+            Designed for real user context: voter type, region, official-source caution, and clear next steps.
+          </p>
         </div>
 
         <div class="assistant-layout">
           <aside class="control-panel" aria-label="User context">
+            <div class="panel-title">
+              <span aria-hidden="true">01</span>
+              <strong>Voter Context</strong>
+            </div>
             <label for="role">I am a</label>
             <select id="role">
               <option value="first-time voter">First-time voter</option>
@@ -85,6 +109,13 @@
           </aside>
 
           <div class="chat-shell">
+            <div class="chat-header">
+              <div>
+                <span class="live-dot" aria-hidden="true"></span>
+                <strong>Ballot Buddy Assistant</strong>
+              </div>
+              <p>Neutral civic education</p>
+            </div>
             <div class="chat-log" id="chatLog" aria-live="polite">
               <article class="message assistant-message">
                 <strong>Ballot Buddy</strong>
@@ -112,13 +143,22 @@
       </section>
 
       <section class="band planner-band" id="planner" aria-labelledby="planner-title">
-        <div class="section-heading">
+        <div class="section-heading split-heading">
+          <div>
           <p class="eyebrow">Timeline Planner</p>
           <h2 id="planner-title">Create a voting checklist</h2>
+          </div>
+          <p>
+            Converts election dates into practical reminders users can add to Google Calendar.
+          </p>
         </div>
 
         <div class="planner-grid">
           <form class="planner-form" id="plannerForm">
+            <div class="panel-title">
+              <span aria-hidden="true">02</span>
+              <strong>Election Details</strong>
+            </div>
             <label for="electionName">Election name</label>
             <input id="electionName" type="text" placeholder="Example: Local Assembly Election">
 
@@ -138,9 +178,14 @@
       </section>
 
       <section class="band" id="learn" aria-labelledby="learn-title">
-        <div class="section-heading">
+        <div class="section-heading split-heading">
+          <div>
           <p class="eyebrow">Learning Cards</p>
           <h2 id="learn-title">Core election concepts</h2>
+          </div>
+          <p>
+            Short explanations help first-time users learn the process before asking deeper questions.
+          </p>
         </div>
 
         <div class="cards">
