@@ -77,7 +77,7 @@ async function backendAnswer(question) {
 async function handleQuestion(question) {
   addMessage("user", "You", escapeHtml(question));
   questionInput.value = "";
-  addMessage("assistant", "Ballot Buddy", "Thinking...");
+  addMessage("assistant", "VoteSetu India", "Thinking...");
 
   const pending = chatLog.lastElementChild;
   try {
@@ -109,52 +109,23 @@ readinessForm.addEventListener("submit", (event) => {
   const hasId = document.querySelector("#hasId").value;
   const boothKnown = document.querySelector("#boothKnown").value;
 
-  if (!Number.isInteger(age) || age < 1 || age > 120) {
-    readinessOutput.innerHTML = '<p class="empty-state">Enter a valid age between 1 and 120.</p>';
-    return;
-  }
+  try {
+    const result = VoteSetuReadiness.calculateReadiness({ age, registered, hasId, boothKnown });
+    const actionItems = result.actions.map((action) => `<li>${escapeHtml(action)}</li>`).join("");
 
-  let score = 100;
-  const actions = [];
-
-  if (age < 18) {
-    score = 20;
-    actions.push("You are not eligible yet. Prepare documents and learn the registration process before turning 18.");
-  }
-
-  if (age >= 18 && registered !== "yes") {
-    score -= registered === "no" ? 35 : 25;
-    actions.push("Confirm your name on the electoral roll or complete registration through the official voter services portal.");
-  }
-
-  if (age >= 18 && hasId !== "yes") {
-    score -= hasId === "no" ? 25 : 15;
-    actions.push("Check the accepted photo ID list for your region and arrange a valid document.");
-  }
-
-  if (age >= 18 && boothKnown !== "yes") {
-    score -= 15;
-    actions.push("Verify your polling booth close to election day using official election authority tools.");
-  }
-
-  if (!actions.length) {
-    actions.push("You look ready. Recheck booth details and accepted documents before polling day.");
-  }
-
-  const boundedScore = Math.max(0, Math.min(100, score));
-  const level = boundedScore >= 85 ? "Ready" : boundedScore >= 55 ? "Almost ready" : "Needs attention";
-  const actionItems = actions.map((action) => `<li>${escapeHtml(action)}</li>`).join("");
-
-  readinessOutput.innerHTML = `
-    <div class="score-card">
-      <span>${boundedScore}</span>
-      <div>
-        <strong>${level}</strong>
-        <p>Readiness score based on eligibility, registration, ID, and polling-booth preparation.</p>
+    readinessOutput.innerHTML = `
+      <div class="score-card">
+        <span>${result.score}</span>
+        <div>
+          <strong>${result.level}</strong>
+          <p>Readiness score based on eligibility, registration, ID, and polling-booth preparation.</p>
+        </div>
       </div>
-    </div>
-    <ol class="action-list">${actionItems}</ol>
-  `;
+      <ol class="action-list">${actionItems}</ol>
+    `;
+  } catch (error) {
+    readinessOutput.innerHTML = `<p class="empty-state">${escapeHtml(error.message)}</p>`;
+  }
 });
 
 function addDays(date, days) {
@@ -175,6 +146,11 @@ function calendarLink(title, date) {
   const start = date.toISOString().slice(0, 10).replaceAll("-", "");
   const text = encodeURIComponent(title);
   return `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${text}&dates=${start}/${start}`;
+}
+
+function mapsLink(region) {
+  const query = encodeURIComponent(`election office ${region || "India"}`);
+  return `https://www.google.com/maps/search/?api=1&query=${query}`;
 }
 
 plannerForm.addEventListener("submit", (event) => {
@@ -224,7 +200,13 @@ plannerForm.addEventListener("submit", (event) => {
     `)
     .join("");
 
-  timelineOutput.innerHTML = `<ol class="timeline-list">${items}</ol>`;
+  const region = regionInput.value.trim() || "India";
+  timelineOutput.innerHTML = `
+    <ol class="timeline-list">${items}</ol>
+    <p class="source-helper">
+      Need nearby help? <a href="${mapsLink(region)}" target="_blank" rel="noreferrer">Search election offices on Google Maps</a>.
+    </p>
+  `;
 });
 
 document.querySelectorAll("[data-answer]").forEach((button) => {

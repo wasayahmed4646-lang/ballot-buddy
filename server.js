@@ -2,6 +2,7 @@ const http = require("http");
 const fs = require("fs");
 const path = require("path");
 const { answerQuestion } = require("./src/assistantCore");
+const resourcesHandler = require("./api/resources");
 
 const root = __dirname;
 const port = Number(process.env.PORT || 3000);
@@ -87,6 +88,24 @@ const server = http.createServer(async (request, response) => {
       ok: true,
       geminiConfigured: Boolean(process.env.GEMINI_API_KEY)
     });
+    return;
+  }
+
+  if (request.url.startsWith("/api/resources")) {
+    const url = new URL(request.url, `http://${request.headers.host}`);
+    const query = Object.fromEntries(url.searchParams.entries());
+    await resourcesHandler(
+      { method: request.method, query },
+      {
+        status(code) {
+          response.statusCode = code;
+          return this;
+        },
+        json(payload) {
+          sendJson(response, response.statusCode || 200, payload);
+        }
+      }
+    );
     return;
   }
 

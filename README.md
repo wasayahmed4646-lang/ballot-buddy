@@ -53,6 +53,23 @@ Main features:
 - Simple quiz for safe information habits
 - Backend API at `/api/assistant`
 - Health endpoint at `/api/health`
+- Google resource endpoint at `/api/resources`
+
+## Testing
+
+Run syntax checks:
+
+```bash
+npm run check
+```
+
+Run automated tests:
+
+```bash
+npm test
+```
+
+The test suite validates assistant topic matching, official-source caution, readiness scoring, edge cases, and invalid input handling.
 
 ## Environment Variables
 
@@ -62,7 +79,14 @@ The backend works without secrets by using a built-in guide. To enable Gemini re
 GEMINI_API_KEY=your_key_here
 ```
 
-On Vercel, add this in the project environment variables.
+To enable Google Custom Search for official-source discovery, set:
+
+```text
+GOOGLE_SEARCH_API_KEY=your_key_here
+GOOGLE_SEARCH_CX=your_search_engine_id
+```
+
+On Vercel, add these in the project environment variables. The app still works without them using curated official links plus Google Search and Google Maps links.
 
 ## Assumptions
 
