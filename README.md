@@ -1,6 +1,6 @@
-# Ballot Buddy
+# VoteSetu India
 
-Ballot Buddy is an election process education assistant built for PromptWars Virtual. It helps users understand eligibility, registration, election timelines, polling day preparation, vote counting, and result verification in a neutral and easy-to-follow way.
+VoteSetu India is an election process education assistant built for PromptWars Virtual. It helps users understand eligibility, registration, election timelines, polling day preparation, vote counting, and result verification in a neutral and easy-to-follow way.
 
 ## Chosen Vertical
 
@@ -44,9 +44,11 @@ Main features:
 
 - Interactive question-and-answer assistant
 - Context controls for voter type and region
+- Civic readiness score with personalized next actions
 - Quick prompts for common election topics
 - Personalized election checklist
 - Google Calendar links for reminders
+- Official verification links for ECI resources
 - Learning cards for key election concepts
 - Simple quiz for safe information habits
 - Backend API at `/api/assistant`

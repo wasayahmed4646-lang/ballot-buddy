@@ -315,7 +315,8 @@ nav a:hover {
   padding: clamp(48px, 7vw, 86px) clamp(18px, 4vw, 64px);
 }
 
-.planner-band {
+.planner-band,
+.readiness-band {
   background: rgba(238, 243, 235, 0.78);
 }
 
@@ -343,7 +344,8 @@ nav a:hover {
 }
 
 .assistant-layout,
-.planner-grid {
+.planner-grid,
+.readiness-grid {
   display: grid;
   gap: 20px;
   grid-template-columns: minmax(240px, 340px) minmax(0, 1fr);
@@ -351,8 +353,10 @@ nav a:hover {
 
 .control-panel,
 .planner-form,
+.readiness-form,
 .chat-shell,
 .timeline-output,
+.readiness-output,
 .quiz {
   background: rgba(255, 255, 255, 0.9);
   border: 1px solid var(--line);
@@ -361,7 +365,8 @@ nav a:hover {
 }
 
 .control-panel,
-.planner-form {
+.planner-form,
+.readiness-form {
   align-self: start;
   display: grid;
   gap: 11px;
@@ -575,9 +580,50 @@ select:focus {
   padding: 14px 18px 18px;
 }
 
-.timeline-output {
+.timeline-output,
+.readiness-output {
   min-height: 286px;
   padding: 18px;
+}
+
+.score-card {
+  align-items: center;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  display: grid;
+  gap: 16px;
+  grid-template-columns: 92px 1fr;
+  padding: 16px;
+}
+
+.score-card span {
+  align-items: center;
+  background: var(--green);
+  border-radius: 50%;
+  color: #fff;
+  display: inline-flex;
+  font-size: 2rem;
+  font-weight: 900;
+  height: 82px;
+  justify-content: center;
+  width: 82px;
+}
+
+.score-card p {
+  color: var(--muted);
+  margin: 4px 0 0;
+}
+
+.action-list {
+  display: grid;
+  gap: 10px;
+  margin: 14px 0 0;
+  padding-left: 22px;
+}
+
+.action-list li {
+  color: var(--muted);
 }
 
 .empty-state {
@@ -623,6 +669,29 @@ select:focus {
   display: grid;
   gap: 16px;
   grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.official-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 18px;
+}
+
+.official-links a {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  color: var(--green);
+  font-weight: 900;
+  padding: 9px 12px;
+  text-decoration: none;
+}
+
+.official-links a:hover,
+.official-links a:focus-visible {
+  border-color: var(--green);
+  outline: none;
 }
 
 .card {
@@ -715,6 +784,7 @@ footer p {
   .hero,
   .assistant-layout,
   .planner-grid,
+  .readiness-grid,
   .split-heading {
     grid-template-columns: 1fr;
   }

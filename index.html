@@ -3,21 +3,22 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Election process education assistant for PromptWars Virtual.">
-    <title>Ballot Buddy</title>
+    <meta name="description" content="VoteSetu India is an AI-ready election process education assistant for PromptWars Virtual.">
+    <title>VoteSetu India</title>
     <link rel="stylesheet" href="styles.css">
   </head>
   <body>
     <header class="topbar">
       <div class="brand">
-        <span class="brand-mark" aria-hidden="true">BB</span>
+        <span class="brand-mark" aria-hidden="true">VS</span>
         <div>
         <p class="eyebrow">PromptWars Virtual</p>
-        <h1>Ballot Buddy</h1>
+        <h1>VoteSetu India</h1>
         </div>
       </div>
       <nav aria-label="Primary navigation">
         <a href="#assistant">Assistant</a>
+        <a href="#readiness">Readiness</a>
         <a href="#planner">Planner</a>
         <a href="#learn">Learn</a>
       </nav>
@@ -27,10 +28,10 @@
       <section class="hero" aria-labelledby="hero-title">
         <div class="hero-copy">
           <p class="eyebrow">Election Process Education</p>
-          <h2 id="hero-title">Understand every election step without getting lost.</h2>
+          <h2 id="hero-title">Your civic election guide, from eligibility to polling day.</h2>
           <p>
             Ask a question, pick your voting situation, or build a personal timeline.
-            The assistant keeps answers neutral, accessible, and grounded in official verification.
+            VoteSetu India keeps answers neutral, accessible, and grounded in official verification.
           </p>
           <div class="trust-strip" aria-label="Product strengths">
             <span>Neutral guidance</span>
@@ -48,7 +49,7 @@
             <img class="hero-mark" src="assets/ballot-mark.svg" alt="Stylized ballot checklist">
             <div>
               <p class="panel-label">Live Journey Map</p>
-              <strong>4 guided steps</strong>
+              <strong>5 guided tools</strong>
             </div>
           </div>
           <div class="journey-step active">
@@ -66,6 +67,10 @@
           <div class="journey-step">
             <span>4</span>
             <p>Prepare for polling day</p>
+          </div>
+          <div class="journey-step">
+            <span>5</span>
+            <p>Score your readiness</p>
           </div>
         </div>
       </section>
@@ -112,13 +117,13 @@
             <div class="chat-header">
               <div>
                 <span class="live-dot" aria-hidden="true"></span>
-                <strong>Ballot Buddy Assistant</strong>
+                <strong>VoteSetu Assistant</strong>
               </div>
               <p>Neutral civic education</p>
             </div>
             <div class="chat-log" id="chatLog" aria-live="polite">
               <article class="message assistant-message">
-                <strong>Ballot Buddy</strong>
+                <strong>VoteSetu India</strong>
                 <p>
                   Hi. Tell me what you need: registration, eligibility, documents, timelines,
                   polling day steps, or election result basics. I will keep it neutral and point you back to official verification.
@@ -142,6 +147,56 @@
         </div>
       </section>
 
+      <section class="band readiness-band" id="readiness" aria-labelledby="readiness-title">
+        <div class="section-heading split-heading">
+          <div>
+          <p class="eyebrow">Readiness Check</p>
+          <h2 id="readiness-title">Get a civic readiness score</h2>
+          </div>
+          <p>
+            A short decision flow turns user context into a score, priority actions, and risk warnings.
+          </p>
+        </div>
+
+        <div class="readiness-grid">
+          <form class="readiness-form" id="readinessForm">
+            <div class="panel-title">
+              <span aria-hidden="true">02</span>
+              <strong>Voter Path</strong>
+            </div>
+
+            <label for="age">Age</label>
+            <input id="age" type="number" min="1" max="120" placeholder="Example: 19">
+
+            <label for="registered">Voter registration</label>
+            <select id="registered">
+              <option value="yes">Registered</option>
+              <option value="no">Not registered</option>
+              <option value="unsure">Not sure</option>
+            </select>
+
+            <label for="hasId">Photo ID status</label>
+            <select id="hasId">
+              <option value="yes">I have accepted photo ID</option>
+              <option value="no">I need to arrange ID</option>
+              <option value="unsure">I am not sure which ID is accepted</option>
+            </select>
+
+            <label for="boothKnown">Polling booth</label>
+            <select id="boothKnown">
+              <option value="yes">I know my polling booth</option>
+              <option value="no">I need to check it</option>
+            </select>
+
+            <button class="button primary full" type="submit">Calculate Score</button>
+          </form>
+
+          <div class="readiness-output" id="readinessOutput">
+            <p class="empty-state">Complete the check to see your score and next actions.</p>
+          </div>
+        </div>
+      </section>
+
       <section class="band planner-band" id="planner" aria-labelledby="planner-title">
         <div class="section-heading split-heading">
           <div>
@@ -156,7 +211,7 @@
         <div class="planner-grid">
           <form class="planner-form" id="plannerForm">
             <div class="panel-title">
-              <span aria-hidden="true">02</span>
+              <span aria-hidden="true">03</span>
               <strong>Election Details</strong>
             </div>
             <label for="electionName">Election name</label>
@@ -186,6 +241,12 @@
           <p>
             Short explanations help first-time users learn the process before asking deeper questions.
           </p>
+        </div>
+
+        <div class="official-links" aria-label="Official verification links">
+          <a href="https://www.eci.gov.in/" target="_blank" rel="noreferrer">Election Commission of India</a>
+          <a href="https://voters.eci.gov.in/" target="_blank" rel="noreferrer">Voter Services Portal</a>
+          <a href="https://electoralsearch.eci.gov.in/" target="_blank" rel="noreferrer">Electoral Search</a>
         </div>
 
         <div class="cards">
@@ -226,7 +287,7 @@
 
     <footer>
       <p>
-        Ballot Buddy is an educational guide. Always verify deadlines, eligibility, and polling information with the official election authority for your region.
+        VoteSetu India is an educational guide, not an official government service. Always verify deadlines, eligibility, and polling information with the official election authority for your region.
       </p>
     </footer>
 
