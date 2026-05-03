@@ -6,7 +6,8 @@
   "scripts": {
     "start": "node server.js",
     "check": "node --check app.js && node --check server.js && node --check api/assistant.js && node --check api/resources.js && node --check src/assistantCore.js && node --check src/readinessCore.js && node --check test.js",
-    "test": "node test.js"
+    "test": "node test.js",
+    "verify": "npm run check && npm test"
   },
   "keywords": [
     "promptwars",

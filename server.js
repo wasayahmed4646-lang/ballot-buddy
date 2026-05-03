@@ -113,5 +113,5 @@ const server = http.createServer(async (request, response) => {
 });
 
 server.listen(port, () => {
-  console.log(`Ballot Buddy running at http://localhost:${port}`);
+  console.log(`VoteSetu India running at http://localhost:${port}`);
 });

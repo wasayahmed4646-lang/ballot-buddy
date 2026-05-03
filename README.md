@@ -71,6 +71,8 @@ npm test
 
 The test suite validates assistant topic matching, official-source caution, readiness scoring, edge cases, and invalid input handling.
 
+The repository also includes [TESTING.md](./TESTING.md) and a GitHub Actions workflow at `.github/workflows/test.yml`.
+
 ## Environment Variables
 
 The backend works without secrets by using a built-in guide. To enable Gemini responses, set:

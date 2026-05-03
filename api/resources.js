@@ -16,7 +16,7 @@ const fallbackResources = [
   }
 ];
 
-module.exports = async function handler(request, response) {
+async function handler(request, response) {
   const region = String(request.query?.region || "").slice(0, 80);
   const apiKey = process.env.GOOGLE_SEARCH_API_KEY;
   const cx = process.env.GOOGLE_SEARCH_CX;
@@ -60,7 +60,7 @@ module.exports = async function handler(request, response) {
       googleMapsUrl: buildGoogleMapsUrl(region)
     });
   }
-};
+}
 
 function buildGoogleSearchUrl(region) {
   const query = encodeURIComponent(`official election voter services ${region} India`);
@@ -71,3 +71,8 @@ function buildGoogleMapsUrl(region) {
   const query = encodeURIComponent(`election office ${region} India`);
   return `https://www.google.com/maps/search/?api=1&query=${query}`;
 }
+
+module.exports = handler;
+module.exports.fallbackResources = fallbackResources;
+module.exports.buildGoogleSearchUrl = buildGoogleSearchUrl;
+module.exports.buildGoogleMapsUrl = buildGoogleMapsUrl;

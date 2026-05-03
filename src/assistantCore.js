@@ -169,5 +169,6 @@ async function answerQuestion(input) {
 
 module.exports = {
   answerQuestion,
-  buildLocalAnswer
+  buildLocalAnswer,
+  findTopic
 };
