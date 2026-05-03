@@ -20,9 +20,12 @@ The assistant is intentionally non-partisan. It explains processes, not politica
 
 ## Google Services Used
 
-- Optional Gemini API integration through a user-provided API key for richer assistant responses.
+- Optional Google Gemini API integration through `GEMINI_API_KEY` for richer assistant responses.
 - Google Calendar reminder links for election preparation tasks.
-- The app is ready to be developed in Google Antigravity and hosted as a lightweight static project.
+- Google Maps links for nearby election-office discovery.
+- Optional Google Custom Search integration through `GOOGLE_SEARCH_API_KEY` and `GOOGLE_SEARCH_CX` for official-source discovery.
+- Google/Vercel-ready serverless API endpoints for lightweight deployment.
+- The app is ready to be developed in Google Antigravity and hosted as a lightweight full-stack project.
 
 If no Gemini API key is provided, the app still works through a built-in rule-based education guide.
 
@@ -114,4 +117,8 @@ This project is designed to stay within PromptWars repository constraints:
 - `app.js` - frontend assistant, planner, and quiz behavior
 - `server.js` - local Node backend and static server
 - `api/assistant.js` - Vercel serverless assistant endpoint
+- `api/resources.js` - Google Custom Search and curated official-resource endpoint
 - `src/assistantCore.js` - shared assistant logic
+- `src/readinessCore.js` - shared readiness scoring logic
+- `test.js` - automated test suite
+- `TESTING.md` - testing strategy
